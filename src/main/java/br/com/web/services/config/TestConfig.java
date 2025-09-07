@@ -1,8 +1,10 @@
 package br.com.web.services.config;
 
+import br.com.web.services.entities.Category;
 import br.com.web.services.entities.Order;
 import br.com.web.services.entities.User;
 import br.com.web.services.entities.enums.OrderStatus;
+import br.com.web.services.repositories.CategoryRepository;
 import br.com.web.services.repositories.OrderRepository;
 import br.com.web.services.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +18,7 @@ import java.util.Date;
 public class TestConfig {
 
     @Bean
-    CommandLineRunner initDatabase (UserRepository userRepository, OrderRepository orderRepository){
+    CommandLineRunner initDatabase (UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository){
         return args -> {
             User u1 = new User();
             u1.setName("Vic");
@@ -48,6 +50,16 @@ public class TestConfig {
 
             orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 
+            Category c1 = new Category();
+            c1.setName("Eletronicos");
+
+            Category c2 = new Category();
+            c2.setName("Livros");
+
+            Category c3 = new Category();
+            c3.setName("Mercado");
+
+            categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
         };
     }
 }
