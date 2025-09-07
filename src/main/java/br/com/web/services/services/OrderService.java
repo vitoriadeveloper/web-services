@@ -22,7 +22,6 @@ public class OrderService {
     }
 
     public Optional<Order> findById(Long id) {
-        System.out.println("oi");
         return repository.findById(id);
     }
 }

@@ -31,7 +31,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Order>> findById(@PathVariable Long id){
+    public ResponseEntity<Optional<Order>> findById(@PathVariable("id") Long id){
         Optional<Order> order = orderService.findById(id);
         return ResponseEntity.ok().body(order);
     }
