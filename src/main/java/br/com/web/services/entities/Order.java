@@ -1,5 +1,6 @@
 package br.com.web.services.entities;
 
+import br.com.web.services.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,9 +28,21 @@ public class Order implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date moment;
 
+
+    private Integer orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
     private User client;
 
+    public OrderStatus getOrderStatus(){
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus status){
+        if(status != null){
+            this.orderStatus = status.getCode();
+        }
+    }
 }

@@ -2,6 +2,7 @@ package br.com.web.services.config;
 
 import br.com.web.services.entities.Order;
 import br.com.web.services.entities.User;
+import br.com.web.services.entities.enums.OrderStatus;
 import br.com.web.services.repositories.OrderRepository;
 import br.com.web.services.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -32,14 +33,17 @@ public class TestConfig {
             userRepository.saveAll(Arrays.asList(u1, u2));
             Order o1 = new Order();
             o1.setMoment(new Date());
+            o1.setOrderStatus(OrderStatus.PAID);
             o1.setClient(u1);
 
             Order o2 = new Order();
             o2.setMoment(new Date());
+            o2.setOrderStatus(OrderStatus.DELIVERED);
             o2.setClient(u2);
 
             Order o3 = new Order();
             o3.setMoment(new Date());
+            o3.setOrderStatus(OrderStatus.CANCELED);
             o3.setClient(u1);
 
             orderRepository.saveAll(Arrays.asList(o1, o2, o3));
