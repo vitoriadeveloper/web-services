@@ -1,14 +1,8 @@
 package br.com.web.services.config;
 
-import br.com.web.services.entities.Category;
-import br.com.web.services.entities.Order;
-import br.com.web.services.entities.Product;
-import br.com.web.services.entities.User;
+import br.com.web.services.entities.*;
 import br.com.web.services.entities.enums.OrderStatus;
-import br.com.web.services.repositories.CategoryRepository;
-import br.com.web.services.repositories.OrderRepository;
-import br.com.web.services.repositories.ProductRepository;
-import br.com.web.services.repositories.UserRepository;
+import br.com.web.services.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +14,7 @@ import java.util.Date;
 public class TestConfig {
 
     @Bean
-    CommandLineRunner initDatabase (UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository){
+    CommandLineRunner initDatabase (UserRepository userRepository, OrderRepository orderRepository, CategoryRepository categoryRepository, ProductRepository productRepository, OrderItemRepository orderItemRepository){
         return args -> {
             User u1 = new User();
             u1.setName("Vic");
@@ -85,6 +79,29 @@ public class TestConfig {
             p2.getCategories().add(c2);
             p3.getCategories().add(c3);
             productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+            OrderItem oi1 = new OrderItem();
+            oi1.setId(new OrderItemPk());
+            oi1.getId().setOrder(o1);
+            oi1.getId().setProduct(p1);
+            oi1.setQuantity(1);
+            oi1.setPrice(p1.getPrice());
+
+            OrderItem oi2 = new OrderItem();
+            oi2.setId(new OrderItemPk());
+            oi2.getId().setOrder(o1);
+            oi2.getId().setProduct(p3);
+            oi2.setQuantity(2);
+            oi2.setPrice(p3.getPrice());
+
+            OrderItem oi3 = new OrderItem();
+            oi3.setId(new OrderItemPk());
+            oi3.getId().setOrder(o2);
+            oi3.getId().setProduct(p2);
+            oi3.setQuantity(1);
+            oi3.setPrice(p2.getPrice());
+
+            orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
         };
     }
 }
