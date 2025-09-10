@@ -1,6 +1,6 @@
 # Web Services Project
 
-Este projeto é uma API REST em **Spring Boot** para gerenciar usuários, utilizando **Spring Data JPA** com suporte a banco de dados **H2** e **PostgreSQL**.  
+Este projeto é uma API REST em **Spring Boot** para gerenciar usuários, utilizando **Spring Data JPA** com suporte a banco de dados **H2** e **PostgreSQL**. Feito para fins de estudo e prática de acordo com os exercícios do curso de Nélio Alves
 
 A API possui endpoints para criar, consultar, atualizar e deletar usuários, com tratamento de exceções padronizado e validação de dados.
 
