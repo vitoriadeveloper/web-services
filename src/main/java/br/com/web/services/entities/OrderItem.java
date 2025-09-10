@@ -35,4 +35,8 @@ public class OrderItem implements Serializable {
     @MapsId("product") // usa o campo "product" da PK
     @JoinColumn(name = "produto_id")
     private Product product;
+
+    public Double getSubtotal(){
+        return this.quantity * this.price;
+    }
 }

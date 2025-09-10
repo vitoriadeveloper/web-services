@@ -10,6 +10,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "pedidos")
@@ -39,14 +41,23 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
-    public OrderStatus getOrderStatus(){
+    public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
     }
 
-    public void setOrderStatus(OrderStatus status){
-        if(status != null){
+    private Set<OrderItem> items = new HashSet<>();
+
+
+    public void setOrderStatus(OrderStatus status) {
+        if (status != null) {
             this.orderStatus = status.getCode();
         }
     }
 
+    public Double getTotal() {
+        return items
+                .stream()
+                .mapToDouble(OrderItem::getSubtotal)
+                .sum();
+    }
 }
