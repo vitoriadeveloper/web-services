@@ -102,6 +102,15 @@ public class TestConfig {
             oi3.setPrice(p2.getPrice());
 
             orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
+
+            Payment pay1 = new Payment();
+            pay1.setMoment(new Date());
+            pay1.setOrder(o1);
+
+            o1.setPayment(pay1);
+
+            orderRepository.save(o1);
+
         };
     }
 }

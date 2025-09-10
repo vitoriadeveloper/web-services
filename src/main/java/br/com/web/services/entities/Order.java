@@ -36,6 +36,9 @@ public class Order implements Serializable {
     @JsonIgnore
     private User client;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public OrderStatus getOrderStatus(){
         return OrderStatus.valueOf(orderStatus);
     }
@@ -45,4 +48,5 @@ public class Order implements Serializable {
             this.orderStatus = status.getCode();
         }
     }
+
 }
