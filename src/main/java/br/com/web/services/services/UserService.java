@@ -2,6 +2,7 @@ package br.com.web.services.services;
 
 import br.com.web.services.entities.User;
 import br.com.web.services.repositories.UserRepository;
+import br.com.web.services.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +26,9 @@ public class UserService {
         return this.repository.save(user);
     }
 
-    public boolean delete(long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-            return true;
-        }
-        return false;
+    public void delete(long id) {
+        User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado: " + id));
+        repository.delete(user);
     }
 
     public User update(long id, User newUser){
@@ -41,6 +39,6 @@ public class UserService {
                     exists.setEmail(newUser.getEmail());
                     exists.setPhone(newUser.getPhone());
                     return repository.save(exists);
-                }).orElseThrow(()-> new RuntimeException("Usuário não encontrado: " + id));
+                }).orElseThrow(()-> new ResourceNotFoundException("Usuário não encontrado: " + id));
     }
 }
