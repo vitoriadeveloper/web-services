@@ -84,5 +84,73 @@ Respostas possíveis:
 
 ### 3. Criar um novo usuário
 
+POST /usuarios
+```json
+{
+  "name": "Vic",
+  "email": "vic@gmail.com",
+  "phone": "9999999",
+  "password": "123456"
+}
+```
+
+Respostas:
+
+* 201 Created: usuário criado com sucesso
+
+* 400 Bad Request: dados inválidos (mensagem de validação)
+
+### 4. Atualizar usuário
+PUT /usuarios/{id}
+Parâmetros:
+
+`id (path) - ID do usuário`
+
+```json
+{
+  "name": "Vic Updated",
+  "email": "vic.updated@gmail.com",
+  "phone": "9999999",
+  "password": "newpassword"
+}
+```
+Respostas:
+
+* 200 OK: usuário atualizado
+
+* 404 Not Found: usuário não encontrado
 
 
+### 5. Deletar usuário
+DELETE /usuarios/{id}
+Parâmetros:
+
+`id (path) - ID do usuário`
+
+Respostas:
+
+* 204 No Content: usuário deletado com sucesso
+
+* 404 Not Found: usuário não encontrado
+
+## Tratamento de Exceções
+O projeto possui ControllerAdvice para padronizar erros:
+
+- ResourceNotFoundException → retorna JSON 404
+
+## Build & Run
+* Compilar o projeto:
+```bash
+mvn clean install
+```
+
+* Executar:
+```bash
+mvn spring-boot:run
+```
+
+## Observações 
+* Acessar endpoints via Postman ou navegador: `http://localhost:8080/usuarios`
+* O projeto utiliza Lombok, então lembre-se de instalar o plugin no IDE.
+* O UserController usa ResponseEntity para controlar status HTTP.
+* As exceções são tratadas globalmente via @ControllerAdvice.
